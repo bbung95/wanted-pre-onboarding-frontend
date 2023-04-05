@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchSignIn } from "../modules/api";
+import { Context } from "../store/AuthProvider";
 
 const SignIn = () => {
     const navigation = useNavigate();
+    const { isLogin, setIsLogin } = useContext(Context);
+
     const [isValidation, setIsValidation] = useState(false);
     const [formData, setFormData] = useState({
         email: "",
@@ -38,8 +41,8 @@ const SignIn = () => {
 
         // LocalStorage token 저장
         localStorage.setItem("access_token", res.data.access_token);
-
-        // navigation("/signin");
+        await setIsLogin();
+        navigation("/todo");
     };
 
     useEffect(() => {
