@@ -5,8 +5,8 @@ export const Context = createContext();
 const Auth = ({ children }) => {
     const initialize = {
         isLogin: !!localStorage.getItem("access_token"),
-        setIsLogin: () => {
-            setState({ ...state, isLogin: !state.isLogin });
+        setIsLogin: (isLogin) => {
+            setState({ ...state, isLogin: isLogin });
         },
     };
 
