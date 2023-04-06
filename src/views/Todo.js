@@ -22,6 +22,10 @@ const Todo = () => {
         })();
     };
 
+    const handleDeleteTodosItem = (id) => {
+        setTodos([...todos.filter((item) => item.id !== id)]);
+    };
+
     useEffect(() => {
         (async () => {
             const res = await fetchGetTodos();
@@ -34,7 +38,7 @@ const Todo = () => {
             <div className="m-auto p-6 rounded-3xl bg-white" style={{ width: "450px", height: "530px" }}>
                 <ul className="h-96 w-full overflow-y-auto">
                     {todos.map((item) => (
-                        <TodoItem key={item.id} info={item} />
+                        <TodoItem key={item.id} info={item} handle={handleDeleteTodosItem} />
                     ))}
                 </ul>
 

@@ -29,7 +29,6 @@ const SignUp = () => {
             return;
         }
 
-        // 회원가입 api
         const res = await fetchSignUp(formData);
 
         if (res.status !== 201) {
@@ -37,6 +36,7 @@ const SignUp = () => {
             return;
         }
 
+        alert("회원가입이 완료되었습니다.");
         navigation("/signin");
     };
 

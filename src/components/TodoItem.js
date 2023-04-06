@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { fetchDeleteTodo, fetchModifyTodo } from "../modules/api";
 
-const TodoItem = ({ info }) => {
+const TodoItem = ({ info, handle }) => {
     const [textMode, setTextMode] = useState(true);
     const [todoInfo, setTodoInfo] = useState(info);
     const [inputText, setInputText] = useState(info.todo);
@@ -16,6 +16,11 @@ const TodoItem = ({ info }) => {
 
     const handleOnChangeChecked = () => {
         setTodoInfo({ ...todoInfo, isCompleted: !todoInfo.isCompleted });
+    };
+
+    const handleCancelModify = () => {
+        setTextMode(!textMode);
+        setInputText(todoInfo.todo);
     };
 
     const handleModifyTodo = async () => {
@@ -34,11 +39,12 @@ const TodoItem = ({ info }) => {
             alert(res.message);
             return;
         }
+
+        handle(todoInfo.id);
     };
 
     useEffect(() => {
         if (!isLoading) {
-            console.log("실행");
             handleModifyTodo();
         }
     }, [todoInfo.isCompleted, todoInfo.todo]);
@@ -82,7 +88,7 @@ const TodoItem = ({ info }) => {
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                             </svg>
                         </button>
-                        <button data-testid="cancel-button" type="button" className="btn btn-warning w-12 h-12 p-0" onClick={() => setTextMode(!textMode)}>
+                        <button data-testid="cancel-button" type="button" className="btn btn-warning w-12 h-12 p-0" onClick={handleCancelModify}>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                             </svg>
