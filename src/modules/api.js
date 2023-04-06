@@ -2,21 +2,17 @@ import axios from "axios";
 
 const API_URL = "https://www.pre-onboarding-selection-task.shop";
 
-const axiosApi = axios.create({
-    headers: {
-        contentType: "application/json",
-        Authorization: "Bearer " + localStorage.getItem("access_token"),
-    },
-});
-
 export const fetchSignUp = async ({ email, password }) => {
     try {
-        const res = await axiosApi({
+        const res = await axios({
             url: API_URL + "/auth/signup",
             method: "post",
             data: {
                 email,
                 password,
+            },
+            headers: {
+                contentType: "application/json",
             },
         });
         return res;
@@ -30,12 +26,15 @@ export const fetchSignUp = async ({ email, password }) => {
 
 export const fetchSignIn = async ({ email, password }) => {
     try {
-        const res = await axiosApi({
+        const res = await axios({
             url: API_URL + "/auth/signin",
             method: "post",
             data: {
                 email,
                 password,
+            },
+            headers: {
+                contentType: "application/json",
             },
         });
         return res;
@@ -49,11 +48,15 @@ export const fetchSignIn = async ({ email, password }) => {
 
 export const fetchAddTodo = async (todo) => {
     try {
-        const res = await axiosApi({
+        const res = await axios({
             url: API_URL + "/todos",
             method: "post",
             data: {
                 todo,
+            },
+            headers: {
+                contentType: "application/json",
+                Authorization: "Bearer " + localStorage.getItem("access_token"),
             },
         });
         return res;
@@ -67,9 +70,12 @@ export const fetchAddTodo = async (todo) => {
 
 export const fetchGetTodos = async () => {
     try {
-        const res = await axiosApi({
+        const res = await axios({
             url: API_URL + "/todos",
             method: "get",
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem("access_token"),
+            },
         });
         return res;
     } catch (e) {
@@ -82,12 +88,16 @@ export const fetchGetTodos = async () => {
 
 export const fetchModifyTodo = async ({ id, todo, isCompleted }) => {
     try {
-        const res = await axiosApi({
+        const res = await axios({
             url: API_URL + "/todos/" + id,
             method: "put",
             data: {
                 todo,
                 isCompleted,
+            },
+            headers: {
+                contentType: "application/json",
+                Authorization: "Bearer " + localStorage.getItem("access_token"),
             },
         });
         return res;
@@ -101,9 +111,12 @@ export const fetchModifyTodo = async ({ id, todo, isCompleted }) => {
 
 export const fetchDeleteTodo = async (id) => {
     try {
-        const res = await axiosApi({
+        const res = await axios({
             url: API_URL + "/todos/" + id,
             method: "delete",
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem("access_token"),
+            },
         });
         return res;
     } catch (e) {

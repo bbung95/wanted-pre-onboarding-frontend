@@ -27,14 +27,14 @@ const Todo = () => {
     };
 
     useEffect(() => {
-        setTimeout(async () => {
+        (async () => {
             const res = await fetchGetTodos();
             if (res.status !== 200) {
                 alert(res.message);
                 return;
             }
             setTodos(res.data);
-        }, 100);
+        })();
     }, []);
 
     return (
