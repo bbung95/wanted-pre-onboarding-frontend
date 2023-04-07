@@ -10,8 +10,6 @@
 ### Installation
 
 ```
-$ mkdir my-app
-$ cd my-app
 $ git clone https://github.com/bbung95/wanted-pre-onboarding-frontend.git
 ```
 
